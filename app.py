@@ -32,7 +32,7 @@ def generate_token():
      token[token_id] = {"created_at": time, "email": email}
      save_token(token)
 
-     return f"Your canary token is: <strong>{token_id}</strong><br>Email alerts will go to: <strong>{email}</strong>"
+     return render_template('token_page.html', token_id=token_id, email=email)
 
 @app.route('/')
 def index():

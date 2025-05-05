@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title>Your Canary Token</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Your Token Was Created</h2>
+    <p>Here is your unique canarytoken link:</p>
+    <p>
+        <div style="font-weight: bold; font-size: 1.2em; color: #333;">
+            {{ token_id }}
+        </div>
+    </p>
+    <p>Send this link to your decoy target, or save it somewhere. If anyone clicks it, you’ll be alerted.</p>
+</body>
+</html>
