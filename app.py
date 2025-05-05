@@ -18,12 +18,21 @@ def save_token(token):
         with open(TOKENS, 'w') as token_file:
             json.dump(token, token_file, indent=1)
 
+@app.route('/generate', methods=['POST'])
 def generate_token():
+     email = request.form['email']
      token_id = str(uuid.uuid4())
-     time = datetime.utcnow()
-     formatted_time = time.strftime('%Y-%m-%d %H:%M:%S')
+     time = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+    
      token = load_token()
-     token[token_id] = {"created_at": formatted_time}
+     token[token_id] = {"created_at": time, "email": email}
      save_token(token)
-     print("Generated token: {}".format(token_id))
-     return token_id
+
+     return f"Your canary token is: <strong>{token_id}</strong><br>Email alerts will go to: <strong>{email}</strong>"
+
+@app.route('/')
+def index():
+     return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
