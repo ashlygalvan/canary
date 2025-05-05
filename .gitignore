@@ -1,0 +1,9 @@
+# Ignore secrets
+.env
+tokens.json
+
+# Ignore Python cache and virtualenv
+__pycache__/
+*.pyc
+env/
+venv/
