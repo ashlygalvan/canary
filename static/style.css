@@ -23,6 +23,15 @@ input[type="email"] {
   margin-bottom: 15px;
 }
 
+input[type="text"]
+{
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid, #ccc;
+    margin-bottom: 15px;
+}
+
 button {
   padding: 10px 20px;
   border: none;
@@ -36,6 +45,15 @@ button {
 button:hover {
   background-color: #196dc6;
 }
+
+button[type="download"]
+{
+    padding: 5px 10px;
+    border: none;
+    background-color: rgb(130, 104, 154);
+    font-weight: 400;
+    cursor: pointer;
+}S
 
 a {
   color: #196dc6;
