@@ -16,12 +16,8 @@
         <input type="email" id="email" name="email" required>
         <br><br>
 
-        <label for="token_type">Token Type:</label>
-        <select id="token_type" name="token_type" required>
-            <option value="image">Image</option>
-            <option value="link">Embedded Link</option>
-            <option value="doc">Word Doc</option>
-        </select>
+        <input type="hidden" name="token_type" value="link">
+
         <br><br>
 
         <button type="submit">Generate Token</button>

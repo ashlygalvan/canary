@@ -20,22 +20,10 @@
     <p>Send this link to your decoy target, or save it somewhere. If anyone clicks it, you’ll be alerted.</p>
     <br>
 
-    {% if token_type == 'link' %}
-        <p>Use this link:</p>
-        <a href="{{ url_for('trigger', token_id=token_id, _external=True) }}">
-            {{ url_for('trigger', token_id=token_id, _external=True) }}
-        </a>
-    {% elif token_type == 'doc' %}
-        <br>
-        <form action="{{ url_for('generate_doc', token_id=token_id) }}" method="get">
-            <button type="download">Download Word Doc</button>
-        </form>
-    {% elif token_type == 'image' %}
-        <br>
-        <form action="{{ url_for('generate_image', token_id=token_id) }}" method="get">
-            <button type="download">Download Image</button>
-        </form>
-    {% endif %}
+    <p><strong>Tracking Link:</strong></p>
+    <a href="{{ url_for('trigger', token_id=token_id, _external=True) }}">
+        {{ url_for('trigger', token_id=token_id, _external=True) }}
+    </a>
 
     <br>
     <br>

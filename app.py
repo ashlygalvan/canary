@@ -1,13 +1,11 @@
-from flask import Flask, request, render_template, send_file, url_for
+from flask import Flask, request, render_template
 import uuid
 import json
 import os
 import smtplib
-import tempfile
 from email.message import EmailMessage
 from datetime import datetime
 from dotenv import load_dotenv
-from fpdf import FPDF
 
 app = Flask(__name__)
 TOKENS = 'tokens.json'
@@ -28,7 +26,7 @@ def save_token(token):
 def generate_token():
      name_of_token = request.form['name_of_token']
      email = request.form['email']
-     token_type = request.form['token_type']
+     token_type = 'link'
      token_id = str(uuid.uuid4())
      time = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
     
@@ -39,7 +37,7 @@ def generate_token():
                         "token_type": token_type}
      save_token(token)
 
-     return render_template('token_page.html', token_id=token_id, email=email, name_of_token=name_of_token, token_type=token_type)
+     return render_template('token_page.html', token_id=token_id, email=email, name_of_token=name_of_token)
 
 @app.route('/')
 def index():
@@ -97,19 +95,9 @@ def trigger(token_id):
             smtp.login(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASS'))
             smtp.send_message(msg)
 
-        return f"Token triggered! An alert was sent to {user_email}."
+        return render_template('link_page.html')
      except Exception as e:
         return f"Token triggered, but failed to send email: {str(e)}"
-
-@app.route('/generate_doc/<token_id>', methods=['GET'])
-def generate_doc(token_id):
-    return f"This would generate a Word Doc for token: {token_id}"
-
-@app.route('/generate_image/<token_id>', methods=['GET'])
-def generate_image(token_id):
-    return f"This would generate an image for token: {token_id}"
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
