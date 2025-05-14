@@ -99,5 +99,7 @@ def trigger(token_id):
      except Exception as e:
         return f"Token triggered, but failed to send email: {str(e)}"
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
