@@ -54,7 +54,7 @@ def trigger(token_id):
      user_email = token[token_id]['email']
      name_of_token = token[token_id]['name_of_token']
      triggered_time = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
-     ip = request.remote_addr
+     ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
      user_agent = request.headers.get('User-Agent', 'Unknown')
      token[token_id]['last_triggered'] = {
         'timestamp': triggered_time,
